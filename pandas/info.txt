@@ -1,0 +1,41 @@
+🔹 Basic Functions of Pandas
+Task	                   Code
+Load Data	                pd.read_csv()
+Select Columns	            df[['col1', 'col2']]
+Filter Rows	                df[df['col'] > value]
+Add Column	                df['new_col'] = values
+Rename Column	            df.rename(columns={'old': 'new'})
+Sort Data	                df.sort_values(by='col')
+Group Data	                df.groupby('col').mean()
+Merge Data	                pd.merge(df1, df2, on='col')
+Handle Missing Data	        df.fillna(value), df.dropna()
+Remove Duplicates	        df.drop_duplicates()
+
+Q. What is a skewed data?
+
+🔹 Groupby and Aggregation
+Operation	                  Code
+Group by a column	           df.groupby('Column')
+Group & get mean	           df.groupby('Column')['Value'].mean()
+Group by multiple columns	   df.groupby(['Col1', 'Col2'])['Value'].sum()
+Multiple aggregations	       df.groupby('Column')['Value'].agg(['mean', 'sum'])
+Reset index	                   df.groupby('Column', as_index=False).mean()
+Apply custom function	       df.groupby('Column')['Value'].apply(lambda x: x.max() - x.min())
+
+🔹 Merging and Joining
+Join Type	          Code	                                           Description
+Inner (default)	       merge(df1, df2, on='ID', how='inner')	        Returns only matching rows.
+Left Join	           merge(df1, df2, on='ID', how='left')	            Keeps all rows from the left DataFrame (df1) and fills missing values from df2 with NaN.
+Right Join	           merge(df1, df2, on='ID', how='right')	        Keeps all rows from the right DataFrame (df2).
+Outer Join	           merge(df1, df2, on='ID', how='outer')	        Keeps all rows from both DataFrames, filling missing values with NaN.
+
+
+🔹 Reading form different sources
+Source	                   Function
+CSV	                        pd.read_csv('file.csv')
+Excel	                    pd.read_excel('file.xlsx')
+JSON	                    pd.read_json('file.json')
+SQL	                        pd.read_sql('SELECT * FROM table', conn)
+API	                        pd.read_json('https://api.example.com/data')
+Google Sheets	            pd.read_csv(sheet_url)
+Parquet	                    pd.read_parquet('file.parquet')
