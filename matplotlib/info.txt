@@ -1,0 +1,46 @@
+# Line plot 
+When to Use a Line Plot?
+Use Case	                    Why Use a Line Plot?
+Time-series data	            Shows trends over time.
+Comparing multiple trends	    Shows how two or more datasets change together.
+Identifying seasonality	        Highlights repeating patterns.
+Detecting anomalies	            Shows sudden spikes or drops.
+
+Key Points:
+✅ Use list comprehension ([val**2 for val in y]) for lists.
+✅ Use NumPy (y**2) for easy mathematical operations.
+✅ Operations can be performed inside plt.plot() directly.
+
+# Bar plot
+When to Use a Bar Plot?
+✅ Comparing categorical data
+✅ Showing trends over time (e.g., sales per year)
+✅ Visualizing distributions in groups
+
+Key Takeaways for grouped bar chart
+✅ Use np.arange(len(categories)) to generate x positions.
+✅ Shift bars left and right using x - offset and x + offset.
+✅ Adjust width to prevent bars from overlapping.
+
+# Historam
+When to Use a Histogram?
+✅ To analyze distributions of numerical data
+✅ To visualize patterns (e.g., normal vs. skewed distributions)
+✅ To compare multiple datasets
+
+# Scatter plot
+When to Use a Scatter Plot?
+✅ To analyze relationships between two variables
+✅ To detect patterns, correlations, or clusters
+✅ To visualize noisy data distributions
+
+🎯 Key Takeaways
+✔ Bigger scaling factor → Larger spread
+✔ Smaller scaling factor → Tighter spread
+✔ Multiplication controls how wide the values can be
+
+# Pie chart
+When to Use a Pie Chart?
+✔ To show proportions of categories
+✔ When categories sum up to a whole (100%)
+✔ When there are few categories (3-6) for clarity
