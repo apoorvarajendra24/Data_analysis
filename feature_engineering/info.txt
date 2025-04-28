@@ -1,0 +1,100 @@
+1. Deletion Methods
+A. Listwise Deletion (Complete Case Analysis)
+Description: Removes entire rows where any value is missing.
+Pros:
+Simple and easy to implement.
+Works well if missing data is completely random and minimal.
+Cons:
+Can lead to significant data loss if many rows have missing values.
+Bias risk if missingness is not completely random.
+
+B. Pairwise Deletion
+Description: Uses all available data for each analysis instead of removing entire rows.
+Pros:
+Retains more data compared to listwise deletion.
+Cons:
+Can create inconsistencies across analyses.
+Difficult to apply in machine learning models.
+
+
+2. Imputation Methods
+A. Mean/Median/Mode Imputation
+Description: Replaces missing values with the mean (for numerical data), median (for skewed data), or mode (for categorical data).
+Pros:
+Simple and quick to apply.
+Works well if missing values are random and small in number.
+Cons:
+Can distort data distribution and underestimate variance.
+Can weaken relationships between variables.
+
+B. Forward Fill & Backward Fill (Time-Series Data)
+Description: Fills missing values with previous (forward fill) or next (backward fill) available values.
+Pros:
+Suitable for time-series data.
+Cons:
+Can create artificial trends if missing values are large.
+
+C. Interpolation
+Description: Estimates missing values using mathematical techniques (linear, polynomial, spline interpolation).
+Pros:
+More accurate than simple imputation.
+Useful in time-series and numerical datasets.
+Cons:
+May introduce bias if trends are not well captured.
+
+D. K-Nearest Neighbors (KNN) Imputation
+Description: Replaces missing values using the average of the k-nearest neighbors based on other features.
+Pros:
+Preserves relationships between variables.
+Cons:
+Computationally expensive for large datasets.
+Sensitive to choice of k and feature scaling.
+
+E. Regression Imputation
+Description: Uses regression models to predict missing values based on other variables.
+Pros:
+Uses patterns in data, leading to better estimates.
+Cons:
+Can amplify biases if missing data is not random.
+Overfits when used improperly.
+
+Choosing the Right Method
+Method	                   Best For	                                   Limitations
+Listwise Deletion	        Small missing data, MCAR	                Data loss, potential bias
+Pairwise Deletion	        Correlation-based analysis	                Inconsistent datasets
+Mean/Median/Mode	        Small missing values, MAR	                Distorts data, reduces variance
+Forward/Backward Fill	    Time-series data	                        Assumes continuity
+KNN Imputation	            Small missing values, structured data	    Slow on large datasets
+Regression Imputation	    MAR, strong correlations	                Can amplify bias
+MICE (Multiple Imputation)	MAR, complex datasets	                    Computational cost
+Deep Learning Imputation	Large datasets, non-linear patterns	        High resource requirement
+
+
+
+Imbalenced dataset 
+Imbalanced datasets are a common problem in machine learning, where the number of instances in the majority class
+is significantly larger than the number of instances in the minority class. This can lead to poor performance of
+machine learning models, as they may be biased towards the majority class.
+
+How to Handle an Imbalanced Dataset?
+1. Resampling Techniques
+Oversampling (Increase minority class samples)
+SMOTE (Synthetic Minority Over-sampling Technique): Generates synthetic samples for the minority class.
+Random Oversampling: Duplicates existing minority class samples.
+
+Undersampling (Reduce majority class samples)
+Randomly removes majority class samples to balance the dataset.
+
+2. Use Proper Evaluation Metrics
+Precision, Recall, F1-score instead of just accuracy.
+ROC-AUC and PR-AUC curves for better performance measurement.
+
+3. Adjust Model Training
+Class Weights: Give higher weight to the minority class to balance training.
+"""from sklearn.ensemble import RandomForestClassifier
+    model = RandomForestClassifier(class_weight='balanced')"""
+Anomaly Detection Models: Instead of classification, treat the problem as anomaly detection.
+
+Key Takeaway
+⚠️ If a dataset is imbalanced, accuracy alone is misleading. Use resampling,
+proper metrics, and class balancing techniques for better results. 🚀
