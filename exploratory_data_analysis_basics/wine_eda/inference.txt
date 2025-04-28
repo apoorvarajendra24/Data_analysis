@@ -1,0 +1,81 @@
+🚀Relation between some features with others in the dataset according to their correlation values.
+Alcohol vs Quality → Strong positive correlation (~0.48)
+Higher alcohol content is associated with better quality wine.
+
+Volatile Acidity vs Quality → Strong negative correlation (~-0.39)
+High volatile acidity negatively impacts wine quality (sour taste).
+
+Citric Acid vs Fixed Acidity → Strong positive correlation (~0.67)
+Wines with more fixed acidity also have more citric acid.
+
+Density vs Alcohol → Strong negative correlation (~-0.50)
+Higher alcohol lowers wine density (since alcohol is less dense than water).
+
+Total Sulfur Dioxide vs Free Sulfur Dioxide → Strong positive correlation (~0.72)
+More total SO₂ means more free SO₂ available for preservation.
+
+Fixed Acidity vs pH → Strong negative correlation (~-0.68)
+Higher acidity leads to lower pH.
+
+Sulphates vs Quality → Moderate positive correlation (~0.39)
+Higher sulphates may slightly improve wine quality.
+
+Also there is no such feature that is completely independent of itself having a correlation value of 0.
+
+
+🚀Inference from the Distribution Plots
+Skewness in Features
+Some features, like volatile acidity and chlorides, are right-skewed, meaning most wines have low values, but some have much higher values.
+Features like density and pH appear more normally distributed.
+
+Outliers
+Features like residual sugar, sulphates, and alcohol show some extreme values, indicating possible outliers.
+
+Quality Distribution is Imbalanced
+The quality feature is imbalanced, mostly concentrated around 5 and 6, which confirms the need for resampling techniques (like SMOTE).
+
+Alcohol & Sulphates Impact
+Alcohol and sulphates have a somewhat normal distribution, indicating that most wines have similar levels of these components.
+
+Density & Sugar Correlation
+The density feature has a distribution that suggests it is influenced by residual sugar, which aligns with the idea that sugar increases liquid density.
+
+
+Additional processes to perform
+
+Normalize/Scale Numerical Features
+Since your dataset has different value ranges (e.g., alcohol is in percentages, but density is a small decimal), scaling can improve model performance.
+Use StandardScaler (for most ML models) or MinMaxScaler (for deep learning):
+
+from sklearn.preprocessing import StandardScaler
+scaler = StandardScaler()
+df_scaled = df.copy()
+df_scaled[df.columns[:-1]] = scaler.fit_transform(df[df.columns[:-1]])  # Scale all features except target
+
+StandardScaler → Scales data to zero mean & unit variance (good for models like SVM, Logistic Regression).
+MinMaxScaler → Scales between 0 and 1 (good for deep learning & distance-based models).
+
+Encode Categorical Data (If Needed)
+If your dataset had categorical features (like wine type), you'd need to encode them:
+
+df = pd.get_dummies(df, drop_first=True)  # One-Hot Encoding
+
+Your dataset only has numerical values, so this may not be needed.
+
+Check Feature Correlation & Remove Redundant Features
+Since you plotted a heatmap earlier, check highly correlated features and remove one of them to reduce redundancy.
+If two features have correlation > 0.9, keep only one.
+
+import numpy as np
+corr_matrix = df.corr().abs()
+upper_tri = corr_matrix.where(np.triu(np.ones(corr_matrix.shape), k=1).astype(bool))
+to_drop = [column for column in upper_tri.columns if any(upper_tri[column] > 0.9)]
+df.drop(to_drop, axis=1, inplace=True)
+
+Reduces feature redundancy & prevents multicollinearity issues.
+
+Check for Class Distribution Again
+Since you balanced the dataset, re-check if the classes are evenly distributed:
+
+print(df['quality'].value_counts())
+If class imbalance remains, further resampling may be needed.
